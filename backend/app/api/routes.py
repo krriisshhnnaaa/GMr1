@@ -72,3 +72,4 @@ def stats(user: User = Depends(current_user), db: Session = Depends(get_db)):
     rows = db.execute(select(Classification.category, func.count()).join(EmailMetadata).where(EmailMetadata.user_id == user.id, EmailMetadata.created_at >= since).group_by(Classification.category)).all()
     counts = {category.value: count for category, count in rows}
     return {"processed_today": sum(counts.values()), "categories": {c.value: counts.get(c.value, 0) for c in Category}}
+#change
